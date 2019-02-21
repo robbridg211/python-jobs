@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Login and Registration</title>
+</head>
+<style>
+* {
+    color: blue;
+}
+h1 {
+    background-color: lightblue;
+    border-radius: 10px;
+    width: 600px;
+    text-align: center;
+    padding: 10px;
+    margin: 20px auto;
+}
+.main_container {
+    height: 600px;
+    width: 850px;
+    padding: 10px;
+    border-radius: 15px;
+    background-color: lightgray;
+}
+.reg_container, .login_container {
+    margin: 0px auto;
+    width: 400px;
+    display: inline-block;
+    vertical-align: top;
+}
+form input {
+    display: block;
+    width: 250px;
+    text-align: center;
+    background-color: white;
+    padding: 5px;
+    color: black;
+    border-radius: 10px;
+    margin: 10px 0px;
+}
+.green {
+    background-color: #28a745;
+    color: white;
+    border-radius: 10px;
+    width: 80px;
+    padding: 10px;
+}
+</style>
+
+<body>
+<div class="main_container">
+<h1>Welcome! Sign in to manage your jobs!</h1>
+
+<form class="reg_container"action="/register", method="post">
+    <h2>Register Here</h2>
+  
+    First Name: <br />
+    {% with messages = get_flashed_messages(category_filter=["first_name"]) %}
+        {% if messages %}
+            {% for message in messages %}
+            <span>{{ message|safe }}</span>
+            {% endfor %}
+        {% endif %}
+        {% endwith %} 
+    <input type="text" name="first_name" placeholder="enter first name" value="" />
+
+     
+    Last Name: <br />
+    {% with messages = get_flashed_messages(category_filter=["last_name"]) %}
+        {% if messages %}
+            {% for message in messages %}
+            <span>{{ message|safe }}</span>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <input type="text" name="last_name" placeholder="enter last name" value="" />
+
+     
+    Email: <br />
+    {% with messages = get_flashed_messages(category_filter=["email"]) %}
+        {% if messages %}
+            {% for message in messages %}
+            <span>{{ message|safe }}</span>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <input type="text" name="email" placeholder="enter your email" value="" />
+
+     
+    Password: <br />
+    {% with messages = get_flashed_messages(category_filter=["password"]) %}
+        {% if messages %}
+            {% for message in messages %}
+            <span>{{ message|safe }}</span>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <input type="password" name="password" placeholder="enter password" value="" />
+ 
+     
+    Confirm Password: <br />
+    {% with messages = get_flashed_messages(category_filter=["confirmpassword"]) %}
+        {% if messages %}
+            {% for message in messages %}
+            <span>{{ message|safe }}</span>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <input type="password" name="confirmpassword" placeholder="confirm password"value="" />
+
+
+    <input input type="submit" value="Register!" class="green"/>
+
+</form>
+
+<form class="login_container" action="/login", method="post">
+    <h2>Login Here</h2>
+    Email:
+    {% with messages = get_flashed_messages(category_filter=["log_email"]) %}
+        {% if messages %}
+            {% for message in messages %}
+            <span>{{ message|safe }}</span>
+            {% endfor %}
+        {% endif %}
+    {% endwith %} 
+    <input type="text" name="email" value="" />
+
+    Password: 
+    {% with messages = get_flashed_messages(category_filter=["log_password"]) %}
+        {% if messages %}
+            {% for message in messages %}
+            <span>{{ message|safe }}</span>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <input type="password" name="password" value="" />
+
+    <input type="submit" value="Login" class="green" />
+
+</form>
+</div>
+
+    
+    
+</body>
+</html>

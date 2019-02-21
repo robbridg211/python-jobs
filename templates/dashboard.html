@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+<style>
+* {
+    margin-left: 10px;
+}
+.header, .header h2, .header a {
+    display: inline-block;
+}
+h2 {
+    width: 550px;
+}    
+.header {
+    padding: 10px;
+    width: 944px;
+    background-color: lightblue;
+}
+.red {
+    background-color: red;
+    width: 70px;
+    height: 45px;
+    padding: 10px;
+    color: white;
+    font-weight: 400;
+    border-radius: 10px;
+    text-decoration: none;
+    text-align: center;
+}
+.blue {
+    background-color: #007bff;
+    width: 160px;
+    margin: 0px 30px;
+    padding: 10px;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+
+</style>
+<body>
+    <div class="header">
+        <h2>Welcome Home, {{firstName|upper}}!</h2>
+        <a href="/logout" class="red">Logout</a>
+        <a href="/addJob" class="blue">New job!</a>
+        {% with messages = get_flashed_messages(category_filter=["added"]) %}
+            {% if messages %}
+                {% for message in messages %}
+                <span>{{ message|safe }}</span>
+                {% endfor %}
+            {% endif %}
+        {% endwith %} 
+        {% with messages = get_flashed_messages(category_filter=["edit"]) %}
+            {% if messages %}
+                {% for message in messages %}
+                <span>{{ message|safe }}</span>
+                {% endfor %}
+            {% endif %}
+        {% endwith %} 
+        <div class="everyone">
+            <h1>Everyone's jobs:</h1>
+            <table class="table table-secondary ">
+                <thead>
+                    <tr>
+                    <th scope="col">Job</th>
+                    <th scope="col">Location</th>
+                    <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                        {% if jobs%}
+                        {% for jobs in jobs%}
+                        <tr>
+                            <th >{{jobs.title}}</th>
+                            <th >{{jobs.location}}</th>
+                            <th >
+                                <a href="/view/{{jobs.id}}" class="text-primary">View</a>
+                                {% if session['id'] == jobs.users_id%}
+                                <a href="/delete/{{jobs.id}}" class="text-danger" >Remove</a>
+                                {% endif %}
+                                {% if session['id'] == jobs.users_id%}
+                                <a href="/edit/{{jobs.id}}" class="text-warning">Edit</a>
+                                {% endif %}
+                            </th>
+                        </tr>
+                        {% endfor %}
+                        {% endif %}
+                    </tbody>
+    
+            </table>
+
+        </div>
+
+
+
+        
+    </div>
+</body>
+</html>

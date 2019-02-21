@@ -1,0 +1,77 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Add Job Posting</title>
+<style>
+.header, .header h2, .header a {
+    display: inline-block;
+}
+h2 {
+    width: 550px;
+}    
+.header {
+    padding: 10px;
+    width: 944px;
+    background-color: lightblue;
+}
+.red {
+    background-color: red;
+    width: 70px;
+    height: 45px;
+    padding: 10px;
+    color: white;
+    font-weight: 400;
+    border-radius: 10px;
+    text-decoration: none;
+    text-align: center;
+}
+.blue {
+    background-color: #007bff;
+    width: 160px;
+    margin: 0px 30px;
+    padding: 10px;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+</style>
+</head>
+<body>
+
+    <div class="header">
+        <h2>Hello {{firstName|upper}}! Create a job!</h2>
+        <a href="/dashboard" class="blue">Dashboard</a>
+        <a href="/logout" class="red">Logout</a>  
+    </div>
+    {% with messages = get_flashed_messages(category_filter=["noAdd"]) %}
+        {% if messages %}
+            {% for message in messages %}
+            <span>{{ message|safe }}</span>
+            {% endfor %}
+        {% endif %}
+    {% endwith %} 
+    <div class = "container">
+        <form action = "/jobs/new" method = "post">
+            <div class="form-group">
+                <label >Title</label>
+                <input type="text" name = "title" class="form-control" placeholder="Enter Job Title">
+            </div>
+            <div class="form-group">
+                <label >Description</label>
+                <input type="text" name = "description"  class="form-control" placeholder="Enter Job Description">
+            </div>
+            <div class="form-group">
+                    <label >Location</label>
+                    <input type="text" name = "location"  class="form-control" placeholder="Enter Job Location">
+                </div>
+   
+            <button type="submit" class="btn btn-success" >Submit</button>
+            <a href="/dashboard" class="btn btn-dark">Cancel</a>
+
+        </form>
+    </div>
+</body>
+</html>

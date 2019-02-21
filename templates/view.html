@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Dashboard</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+</head>
+
+<style>
+
+.header, .header h2, .header a {
+    display: inline-block;
+}
+h2 {
+    width: 550px;
+}    
+.header {
+    padding: 10px;
+    width: 944px;
+    background-color: lightblue;
+}
+.red {
+    background-color: red;
+    width: 70px;
+    height: 45px;
+    padding: 10px;
+    color: white;
+    font-weight: 400;
+    border-radius: 10px;
+    text-decoration: none;
+    text-align: center;
+}
+.blue {
+    background-color: #007bff;
+    width: 160px;
+    margin: 0px 30px;
+    padding: 10px;
+    font-weight: 400;
+    text-align: center;
+    color: white;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+</style>
+<body>
+    <div class="header">
+        <h2>Hello {{firstName|upper}}!<br/>
+            These are the job details</h2>
+        <a href="/dashboard" class="blue">Dashboard</a>
+        <a href="/logout" class="red">Logout</a>  
+    </div>
+    {% if viewedJob %}
+        {% for viewedJob in viewedJob%}
+    <h3>{{viewedJob.title}}</h3>
+    <div class="container">
+
+        <p>Description: {{viewedJob['description']}}</p>
+        <p>Location: {{viewedJob.location}}</p>
+        <p>Posted By: {{viewedJob['first_name']}}</p>
+        <p>Posted On: {{viewedJob.created_at}}</p>
+    {% endfor %}
+    {% endif %}
+    </div>
+
+</body>
+</html>
